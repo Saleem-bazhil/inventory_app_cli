@@ -10,4 +10,7 @@ const Customers = () => {
 };
 
 export default Customers;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 307caaaf0ab54b6035270d907e7eef91b3514892

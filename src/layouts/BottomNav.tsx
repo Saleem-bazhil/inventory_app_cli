@@ -1,6 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialDesignIcons from '@react-native-vector-icons/material-design-icons';
 import Dashboard from '../screens/Dashboard';
 import Materials from '../screens/Materials';
 import Customers from '../screens/Customers';
@@ -15,23 +15,23 @@ type TabIconProps = {
 };
 
 const DashboardIcon = ({color, size}: TabIconProps) => (
-  <MaterialCommunityIcons name="view-dashboard-outline" color={color} size={size} />
+  <MaterialDesignIcons name="view-dashboard-outline" color={color} size={size} />
 );
 
 const MaterialsIcon = ({color, size}: TabIconProps) => (
-  <MaterialCommunityIcons name="diamond-stone" color={color} size={size} />
+  <MaterialDesignIcons name="diamond-stone" color={color} size={size} />
 );
 
 const CustomersIcon = ({color, size}: TabIconProps) => (
-  <MaterialCommunityIcons name="account-group-outline" color={color} size={size} />
+  <MaterialDesignIcons name="account-group-outline" color={color} size={size} />
 );
 
 const TransactionsIcon = ({color, size}: TabIconProps) => (
-  <MaterialCommunityIcons name="swap-horizontal" color={color} size={size} />
+  <MaterialDesignIcons name="swap-horizontal" color={color} size={size} />
 );
 
 const ReportsIcon = ({color, size}: TabIconProps) => (
-  <MaterialCommunityIcons name="chart-bar" color={color} size={size} />
+  <MaterialDesignIcons name="chart-bar" color={color} size={size} />
 );
 
 const BottomNav = () => {
