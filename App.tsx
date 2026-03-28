@@ -1,6 +1,5 @@
 import './global.css';
 import React from 'react';
-import {StatusBar} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {AuthProvider} from './src/context/AuthContext';
 import {ThemeProvider} from './src/context/ThemeContext';
@@ -14,8 +13,6 @@ export default function App() {
           <Stacknavigation />
         </AuthProvider>
       </ThemeProvider>
-      <StatusBar barStyle="dark-content" backgroundColor="#FFFFFF" />
-      <Stacknavigation />
     </SafeAreaProvider>
   );
 }

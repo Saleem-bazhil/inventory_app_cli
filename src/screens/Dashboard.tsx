@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, ScrollView, Text } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient'; 
+import {View, ScrollView, Text} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
+import {useTheme} from '../context/ThemeContext';
 
 // Components
 import Hero from '../components/DashboardScreenComponents/Hero';
@@ -13,52 +13,48 @@ import RecentActivityCard from '../components/DashboardScreenComponents/RecentAc
 const Dashboard = () => {
   const {colors} = useTheme();
   return (
-    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
-      <LinearGradient
-        colors={['#FFFFFF', '#F8FAFC', '#EEF2F6']} 
-        start={{ x: 0.5, y: 0 }} 
-        end={{ x: 0.5, y: 1 }}
-        style={{ flex: 1 }}
-      >
-        <ScrollView
-          className="flex-1"
-          contentContainerStyle={{ paddingBottom: 50 }} 
-          showsVerticalScrollIndicator={false}
-        >
-          <Hero />
+    <SafeAreaView className="flex-1" style={{backgroundColor: colors.background}} edges={[]}>
+      <ScrollView
+        className="flex-1"
+        contentContainerStyle={{paddingBottom: 50}}
+        showsVerticalScrollIndicator={false}>
+        <Hero />
 
-          <View className="z-10 px-5 -mt-8">
-            <Card />
-            <View className="mt-4">
-              <Card variant="totalStock" />
-            </View>
-            <View className="mt-4">
-              <Card variant="lowStockAlerts" />
-            </View>
+        <View className="z-10 -mt-8 px-5">
+          <Card />
+          <View className="mt-4">
+            <Card variant="totalStock" />
+          </View>
+          <View className="mt-4">
+            <Card variant="lowStockAlerts" />
+          </View>
+        </View>
+
+        <View className="mt-8 px-5">
+          <View className="mb-5">
+            <Text
+              className="text-xs font-bold uppercase tracking-[1.8px]"
+              style={{color: colors.textMuted}}>
+              Insights
+            </Text>
+            <Text
+              className="mt-2 text-2xl font-extrabold tracking-tight"
+              style={{color: colors.text}}>
+              Inventory Overview
+            </Text>
           </View>
 
-          <View className="mt-8 px-5">
-            <View className="mb-5">
-              <Text className="text-xs font-bold uppercase tracking-[1.8px] text-slate-400">
-                Insights
-              </Text>
-              <Text className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">
-                Inventory Overview
-              </Text>
-            </View>
+          <DashboardCharts />
 
-            <DashboardCharts />
-
-            <View className="mt-6">
-              <QuickActionsCard />
-            </View>
-
-            <View className="mt-6">
-              <RecentActivityCard />
-            </View>
+          <View className="mt-6">
+            <QuickActionsCard />
           </View>
-        </ScrollView>
-      </LinearGradient>
+
+          <View className="mt-6">
+            <RecentActivityCard />
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
