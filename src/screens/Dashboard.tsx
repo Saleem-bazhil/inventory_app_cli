@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, ScrollView, SafeAreaView, StatusBar, Text } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'; 
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 // Components
 import Hero from '../components/DashboardScreenComponents/Hero';
@@ -11,9 +12,7 @@ import RecentActivityCard from '../components/DashboardScreenComponents/RecentAc
 
 const Dashboard = () => {
   return (
-    <SafeAreaView className="flex-1 bg-white">
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent={true} />
-      
+    <SafeAreaView className="flex-1 bg-white" edges={['top']}>
       <LinearGradient
         colors={['#FFFFFF', '#F8FAFC', '#EEF2F6']} 
         start={{ x: 0.5, y: 0 }} 
