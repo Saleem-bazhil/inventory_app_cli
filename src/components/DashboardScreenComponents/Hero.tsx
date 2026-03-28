@@ -1,14 +1,11 @@
 import { View, Text, TouchableOpacity } from 'react-native';
 import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
 
 const Hero = () => {
   return (
-    <LinearGradient
-      colors={['#1D4ED8', '#1E3A8A']}
-      start={{ x: 0, y: 0 }}
-      end={{ x: 1, y: 1 }}
+    <View
       className="w-full rounded-b-[32px] px-6 pb-16 pt-12"
+      style={{backgroundColor: '#1E3A8A'}}
     >
       <View className="mb-6 flex-row items-start justify-between">
         <View className="flex-1 pr-4">
@@ -42,7 +39,7 @@ const Hero = () => {
           <Text className="mt-1 text-lg font-bold text-white">Stable</Text>
         </View>
       </View> */}
-    </LinearGradient>
+    </View>
   );
 };
 
