@@ -1,85 +1,119 @@
-import { View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions, TouchableOpacity } from 'react-native';
 import React from 'react';
 import LineChart from 'react-native-chart-kit/dist/line-chart';
 import BarChart from 'react-native-chart-kit/dist/BarChart';
 
-// Get the screen width so the charts can be fully responsive
 const screenWidth = Dimensions.get('window').width;
+const chartWidth = screenWidth - 72;
 
-// Shared configuration for the charts to match your clean aesthetic
 const chartConfig = {
   backgroundGradientFrom: '#ffffff',
   backgroundGradientTo: '#ffffff',
-  color: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`, // Gray for grid lines
-  labelColor: (opacity = 1) => `rgba(107, 114, 128, ${opacity})`, // Gray for text
-  strokeWidth: 2, // Line thickness
-  barPercentage: 0.6,
+  color: (opacity = 1) => `rgba(203, 213, 225, ${opacity})`,
+  labelColor: (opacity = 1) => `rgba(100, 116, 139, ${opacity})`,
+  strokeWidth: 3,
+  barPercentage: 0.72,
   useShadowColorFromDataset: false,
   decimalPlaces: 0,
-};
+  propsForDots: {
+    r: '4',
+    strokeWidth: '2',
+    stroke: '#ffffff',
+  },
+} as const;
 
 const DashboardCharts = () => {
   return (
     <View className="w-full">
-      
-      {/* --- CHART 1: Stock Movement (Line Chart) --- */}
-      <View className="bg-white p-5 rounded-3xl mb-4 border border-gray-100 shadow-sm w-full">
-        <Text className="text-gray-900 text-lg font-bold mb-4">Stock Movement</Text>
-        
+      <View className="mb-6 rounded-[28px] border border-slate-200/80 bg-white px-5 py-5 shadow-sm">
+        <View className="mb-2 flex-row items-center justify-between">
+          <View>
+            <Text className="text-lg font-extrabold tracking-tight text-slate-900">
+              Stock Movement
+            </Text>
+            <Text className="mt-1 text-sm text-slate-500">
+              Inflow and outflow trend over the last 6 months
+            </Text>
+          </View>
+          <TouchableOpacity>
+            <Text className="text-sm font-semibold text-blue-600">Details</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View className="mb-4 mt-4 flex-row gap-4">
+          <View className="flex-row items-center">
+            <View className="mr-2 h-2.5 w-2.5 rounded-full bg-emerald-500" />
+            <Text className="text-xs font-semibold text-slate-500">Inflow</Text>
+          </View>
+          <View className="flex-row items-center">
+            <View className="mr-2 h-2.5 w-2.5 rounded-full bg-indigo-600" />
+            <Text className="text-xs font-semibold text-slate-500">Outflow</Text>
+          </View>
+        </View>
+
         <LineChart
           data={{
             labels: ['Oct', 'Nov', 'Dec', 'Jan', 'Feb', 'Mar'],
             datasets: [
               {
                 data: [4000, 3800, 5000, 4500, 3900, 5500],
-                color: (opacity = 1) => `rgba(34, 197, 94, ${opacity})`, // Green (Inflow)
-                strokeWidth: 3
+                color: (opacity = 1) => `rgba(16, 185, 129, ${opacity})`,
               },
               {
                 data: [3500, 4000, 4600, 3900, 4200, 4800],
-                color: (opacity = 1) => `rgba(99, 102, 241, ${opacity})`, // Indigo (Outflow)
-                strokeWidth: 3
-              }
+                color: (opacity = 1) => `rgba(79, 70, 229, ${opacity})`,
+              },
             ],
-            legend: ["Inflow", "Outflow"] // Adds the legend at the bottom automatically
           }}
-          width={screenWidth - 72} // Screen width minus padding and margins
+          width={chartWidth}
           height={220}
           chartConfig={chartConfig}
-          bezier // Makes the lines curved instead of sharp angles
+          bezier
           style={{ borderRadius: 16 }}
-          withDots={false} // Removes the dots on data points to match your design
-          withInnerLines={true} // Keeps the background grid
+          withDots
+          withInnerLines
+          withOuterLines={false}
         />
       </View>
 
-      {/* --- CHART 2: Most Used Materials (Bar Chart) --- */}
-      <View className="bg-white p-5 rounded-3xl mb-4 border border-gray-100 shadow-sm w-full">
-        <Text className="text-gray-900 text-lg font-bold mb-4">Most Used Materials</Text>
-        
+      <View className="rounded-[28px] border border-slate-200/80 bg-white px-5 py-5 shadow-sm">
+        <View className="mb-2 flex-row items-center justify-between">
+          <View>
+            <Text className="text-lg font-extrabold tracking-tight text-slate-900">
+              Most Used Materials
+            </Text>
+            <Text className="mt-1 text-sm text-slate-500">
+              Highest consumption categories this month
+            </Text>
+          </View>
+          <TouchableOpacity>
+            <Text className="text-sm font-semibold text-blue-600">View All</Text>
+          </TouchableOpacity>
+        </View>
+
         <BarChart
           data={{
-            labels: ['Steel', 'PCB', 'Plastic', 'Wire', 'Cap.'], // Shortened labels to fit mobile
+            labels: ['Steel', 'PCB', 'Plastic', 'Wire', 'Cap.'],
             datasets: [
               {
                 data: [12500, 9500, 7000, 6000, 5000],
-              }
-            ]
+              },
+            ],
           }}
-          width={screenWidth - 72}
+          width={chartWidth}
           height={220}
           yAxisLabel=""
           yAxisSuffix=""
           chartConfig={{
             ...chartConfig,
-            color: (opacity = 1) => `rgba(99, 102, 241, ${opacity})`, // Indigo bars
+            color: (opacity = 1) => `rgba(59, 130, 246, ${opacity})`,
           }}
           style={{ borderRadius: 16 }}
           showValuesOnTopOfBars={false}
-          fromZero={true} // Ensures the bars start at the bottom axis
+          fromZero
+          withInnerLines
         />
       </View>
-
     </View>
   );
 };

@@ -1,45 +1,65 @@
-import { View, ScrollView } from 'react-native';
 import React from 'react';
+import { View, ScrollView, SafeAreaView, StatusBar, Text } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient'; 
+
+// Components
 import Hero from '../components/DashboardScreenComponents/Hero';
 import Card from '../components/DashboardScreenComponents/Card';
 import DashboardCharts from '../components/DashboardScreenComponents/DashboardCharts';
+import QuickActionsCard from '../components/DashboardScreenComponents/QuickActionsCard';
+import RecentActivityCard from '../components/DashboardScreenComponents/RecentActivityCard';
+
 const Dashboard = () => {
   return (
-    // Replaced <> with ScrollView and added background color and padding
-    <ScrollView className="flex-1 bg-gray-50 p-4">
+    <SafeAreaView className="flex-1 bg-white">
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent={true} />
       
-      {/* Your Hero Section */}
-      <Hero />
-      
-      <Card />
-      
-      {/* Card 2: Total Stock */}
-      <Card 
-        title="Total Stock" 
-        value="28,028" 
-        subtext="+12% vs last month"
-        subtextColorClass="text-green-500"
-        iconBgClass="bg-indigo-50"
-        iconTextClass="text-indigo-500"
-        iconSymbol="📚" 
-      />
+      <LinearGradient
+        colors={['#FFFFFF', '#F8FAFC', '#EEF2F6']} 
+        start={{ x: 0.5, y: 0 }} 
+        end={{ x: 0.5, y: 1 }}
+        style={{ flex: 1 }}
+      >
+        <ScrollView
+          className="flex-1"
+          contentContainerStyle={{ paddingBottom: 50 }} 
+          showsVerticalScrollIndicator={false}
+        >
+          <Hero />
 
-      {/* Card 3: Stock Alert */}
-      <Card 
-        title="Low Stock Alerts" 
-        value="4" 
-        subtext="4 items need attention"
-        subtextColorClass="text-red-500"
-        iconBgClass="bg-red-50"
-        iconTextClass="text-red-400"
-        iconSymbol="⚠️" 
-      />
+          <View className="z-10 px-5 -mt-8">
+            <Card />
+            <View className="mt-4">
+              <Card variant="totalStock" />
+            </View>
+            <View className="mt-4">
+              <Card variant="lowStockAlerts" />
+            </View>
+          </View>
 
-      {/* A little empty space at the bottom so the last card doesn't hit the bottom edge */}
-      <View className="h-10" />
-      <DashboardCharts />
+          <View className="mt-8 px-5">
+            <View className="mb-5">
+              <Text className="text-xs font-bold uppercase tracking-[1.8px] text-slate-400">
+                Insights
+              </Text>
+              <Text className="mt-2 text-2xl font-extrabold tracking-tight text-slate-950">
+                Inventory Overview
+              </Text>
+            </View>
 
-    </ScrollView>
+            <DashboardCharts />
+
+            <View className="mt-6">
+              <QuickActionsCard />
+            </View>
+
+            <View className="mt-6">
+              <RecentActivityCard />
+            </View>
+          </View>
+        </ScrollView>
+      </LinearGradient>
+    </SafeAreaView>
   );
 };
 
